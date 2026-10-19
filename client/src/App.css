@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+::-webkit-scrollbar{
+  width: 0px;
+}
+
+::-webkit-scrollbar-track{
+  background: #000000 ;
+}
+
+::-webkit-scrollbar-thumb{
+  background: rgb(97, 103, 108);
+  border-radius:4px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background: #424448;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  color: #d9d9d9d9;
+}
+
+.swiper-pagination{
+  display: none;
+}
+body{
+  font-family: "Montserrat";
+}
+@media (max-width: 768px) {
+  .swiper-button-next:after{
+    margin-left:1.4rem;
+  }
+
+  .swiper-button-prev:after {
+    margin-right:1.2rem;
+  }
+}
+
+/* UserTable.css */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Margin între tabel și alte elemente */
+}
+
+th, td {
+  padding: 8px 12px; /* Padding pentru celule */
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Linii între rânduri */
+}
+
+th {
+  background-color: #f2f2f2; /* Culoare de fundal pentru antetele de tabel */
+}
