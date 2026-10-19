@@ -71,3 +71,4 @@ node_modules
 # 3D Images
 *.3dm
 *.max
+/prisma/generated

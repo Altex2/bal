@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import bg_image from "../../../assets/img/Background/colaj.jpg";
 import { AiOutlineMail, AiFillLock } from "react-icons/ai";
 
-import { UserServicePostgresql as serverFunction } from "@genezio-sdk/bbetti";
+import { authClient, authErrorMessage } from "../../../lib/auth-client";
 import BgButton from "../../../assets/img/items/bara-vot.webp";
 
 export default function ResetPasswordConfirmComp() {
@@ -20,13 +20,16 @@ export default function ResetPasswordConfirmComp() {
   const handleSummit = async (event: any) => {
     event.preventDefault();
 
-    const status = await serverFunction.resetPassword(user.token);
+    // The "token" field holds the email on this screen
+    const { error } = await authClient.emailOtp.requestPasswordReset({
+      email: user.token,
+    });
 
-    if (status.status == "ok") {
+    if (!error) {
       window.localStorage.setItem("email", user.token);
       window.location.replace("/resetpassword");
     } else {
-      setError(`${status.errorMessage}`);
+      setError(authErrorMessage(error));
     }
   };
 

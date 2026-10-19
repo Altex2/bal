@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import UserTableDeveloper from "../components/General/UserTableDeveloper.component";
-import { UserServicePostgresql } from "@genezio-sdk/bbetti";
+import { api } from "../../lib/api";
 
 const Developer = () => {
   const [jsonData, setJsonData] = useState([]);
   React.useEffect(() => {
     async function getUsersDB() {
-      if (!window.localStorage.getItem("token")) {
-        window.location.replace("/");
-      }
-      const jsonData = await UserServicePostgresql.getConcurenti(
-        window.localStorage.getItem("token")!
-      );
+      // Superadmin only
+      const jsonData = await api("/admin/concurenti");
       if (jsonData.status !== "ok") {
         window.location.replace("/");
+        return;
       }
       setJsonData(jsonData.concurenti);
     }

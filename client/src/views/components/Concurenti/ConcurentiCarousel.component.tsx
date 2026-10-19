@@ -16,7 +16,8 @@ import { useNavigate } from "react-router-dom";
 import BgButton from "../../../assets/img/items/bara-vot.webp";
 
 import { Concurenti } from "../../../assets/config/Concurenti";
-import { UserServicePostgresql as serverFunction } from "@genezio-sdk/bbetti";
+import { authClient } from "../../../lib/auth-client";
+import { api } from "../../../lib/api";
 
 interface Concurent {
   image: string;
@@ -60,47 +61,37 @@ export default function ConcurentiCarousel() {
     setConcurentiOrder(shuffledConcurenti);
   }, []);
 
+  const { data: session } = authClient.useSession();
+
   const vote = async () => {
-    const email = localStorage.getItem("email");
-    const ceva = await serverFunction.canVote(
-      window.localStorage.getItem("email") || "",
-      window.localStorage.getItem("token") || ""
-    );
-    setUser({ fata: ceva.statusF, baiat: ceva.statusB });
+    const status = await api("/vote");
+    if (status.ok) {
+      setUser({ fata: status.canVoteF, baiat: status.canVoteM });
+    }
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (session) {
       vote();
     }
-  }, []);
+  }, [session]);
 
   const handleVote = async (concurent: Concurent) => {
     try {
-      if (!localStorage.getItem("token")) {
-        throw new Error("Login first");
-      }
-      const userV = await serverFunction.checkSession(
-        window.localStorage.getItem("token") || ""
-      );
-
-      if (!userV) {
+      if (!session) {
         throw new Error("Login first");
       }
 
-      if (userV.status === "ok") {
-        const voteStatus = await serverFunction.voteConcurenti(
-          window.localStorage.getItem("email") || "",
-          concurent.idConcurent,
-          concurent.sex,
-          window.localStorage.getItem("token") || ""
-        );
+      // Gender is read from the database on the server, only the id is sent
+      const voteStatus = await api("/vote", {
+        method: "POST",
+        body: JSON.stringify({ idConcurent: concurent.idConcurent }),
+      });
 
-        if (voteStatus.status !== "ok") {
-          throw new Error(`${voteStatus.status}`);
-        } else {
-          navigate("/");
-        }
+      if (voteStatus.status !== "ok") {
+        throw new Error(`${voteStatus.errorMessage}`);
+      } else {
+        navigate("/");
       }
     } catch (error) {
       setError(`${error}`);

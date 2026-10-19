@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import bg_image from "../../../assets/img/Background/colaj.jpg";
 import { AiOutlineMail, AiFillLock } from "react-icons/ai";
 
-import { UserServicePostgresql as serverFunction } from "@genezio-sdk/bbetti";
+import { authClient, authErrorMessage } from "../../../lib/auth-client";
 import BgButton from "../../../assets/img/items/bara-vot.webp";
 
 const OtpComp = () => {
@@ -22,24 +22,31 @@ const OtpComp = () => {
   const handleSummit = async (event: any) => {
     event.preventDefault();
 
-    const status = await serverFunction.emailConfirmation(user.token);
+    // Verifying also signs the user in (autoSignInAfterVerification)
+    const { error } = await authClient.emailOtp.verifyEmail({
+      email: user.email,
+      otp: user.token.trim(),
+    });
 
-    if (status.status === "ok") {
-      localStorage.setItem("email", status.user?.email!);
-      localStorage.setItem("token", status.token!);
+    if (!error) {
+      localStorage.setItem("email", user.email);
       window.location.replace("/");
     } else {
-      setError(`${status.errorMessage}`);
+      setError(authErrorMessage(error));
     }
   };
 
   const resendEmail = async (event: any) => {
-    const status = await serverFunction.resendEmailConfirmation(user.email);
+    event.preventDefault();
+    const { error } = await authClient.emailOtp.sendVerificationOtp({
+      email: user.email,
+      type: "email-verification",
+    });
 
-    if (status.status == "ok") {
+    if (!error) {
       setError("Codul de verificare a fost trimis!");
     } else {
-      setError(`${status.errorMessage}`);
+      setError(authErrorMessage(error));
     }
   };
 

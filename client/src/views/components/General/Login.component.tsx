@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import bg_image from "../../../assets/img/Background/colaj.jpg";
 import { AiOutlineMail, AiFillLock } from "react-icons/ai";
 
-import { UserServicePostgresql as serverFunction } from "@genezio-sdk/bbetti";
+import { authClient, authErrorMessage } from "../../../lib/auth-client";
 import BgButton from "../../../assets/img/items/bara-vot.webp";
 
 export default function LoginComp() {
@@ -25,17 +25,19 @@ export default function LoginComp() {
   const handleSummit = async (event: any) => {
     event.preventDefault();
 
-    const status = await serverFunction.login(user.email, user.password);
+    const { error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+    });
 
-    const info = status.status;
-
-    if (info == "ok" && status.user?.verified) {
+    if (!error) {
       localStorage.setItem("email", user.email);
-      localStorage.setItem("token", status.token || "");
       window.location.replace("/");
-    } else if (info == "ok" && !status.user?.verified) {
+    } else if (error.code === "EMAIL_NOT_VERIFIED") {
+      // Better Auth has just emailed a new code (sendOnSignIn)
+      localStorage.setItem("email", user.email);
       window.location.replace("/otp");
-    } else setError(`${status.errorMessage}`);
+    } else setError(authErrorMessage(error));
   };
 
   return (

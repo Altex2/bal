@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import UserTableAdmin from "../components/General/UserTable.component";
-import { UserServicePostgresql } from "@genezio-sdk/bbetti";
+import { api } from "../../lib/api";
 
 const Admin = () => {
   const [jsonData, setJsonData] = useState([]);
@@ -8,26 +8,14 @@ const Admin = () => {
 
   React.useEffect(() => {
     async function getUsersDB() {
-      if (!window.localStorage.getItem("token")) {
-        window.location.replace("/");
-      }
-      const jsonData = await UserServicePostgresql.getUsers(
-        window.localStorage.getItem("token")!
-      );
+      // 401 without a session, 403 without the admin role
+      const jsonData = await api("/admin/users");
       if (jsonData.status !== "ok") {
         window.location.replace("/");
+        return;
       }
 
-      const adminType = await UserServicePostgresql.isAdmin(
-        window.localStorage.getItem("token")!
-      );
-
-      if (adminType.status !== "ok") {
-        window.location.replace("/");
-      }
-
-      setAdminType(adminType.admin);
-
+      setAdminType(jsonData.adminType);
       setJsonData(jsonData.users);
     }
 

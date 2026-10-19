@@ -1,39 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
-import { UserServicePostgresql as serverFunction } from "@genezio-sdk/bbetti";
+import { authClient } from "../../../lib/auth-client";
 
 export default function Header() {
   const [nav, setNav] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
-  const [isAdmin, setIsAdmin] = useState("");
+  const { data: session } = authClient.useSession();
+  const isAuth = !!session;
+  const isAdmin = session?.user.admin || "";
 
   const handleNav = () => {
     setNav(!nav);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    const CheckSS = async () => {
-      if (!token) return;
-
-      const auth = await serverFunction.checkSession(token || "null");
-      if (auth.status == "ok") {
-        setIsAuth(true);
-      }
-
-      const admin = await serverFunction.isAdmin(token || "null");
-      if (admin.status == "ok") {
-        setIsAdmin(admin.admin);
-      }
-    };
-
-    CheckSS();
-  }, []);
-
-  const handleLogOut = () => {
-    window.localStorage.clear();
+  const handleLogOut = async (event: MouseEvent) => {
+    event.preventDefault();
+    await authClient.signOut();
+    window.location.replace("/");
   };
 
   return (
@@ -79,7 +62,7 @@ export default function Header() {
             </a>
           ) : null}
 
-          {!window.localStorage.getItem("token") ? (
+          {!isAuth ? (
             <a
               href="/login"
               className=" no-underline duration-300 hover:text-[#d9d9d9d9] px-5 py-2 ml-2 rounded-2xl shaodw-lg hover:shadow-2xl"
@@ -130,7 +113,7 @@ export default function Header() {
               </li>
             ) : null}
 
-            {!window.localStorage.getItem("token") ? (
+            {!isAuth ? (
               <li className=" py-6 border-b">
                 <a href="/login">Autentificare</a>
               </li>

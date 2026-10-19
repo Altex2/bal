@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import bg_image from "../../../assets/img/Background/colaj.jpg";
 import { AiOutlineMail, AiFillLock } from "react-icons/ai";
 
-import { UserServicePostgresql as serverFunction } from "@genezio-sdk/bbetti";
+import { authClient, authErrorMessage } from "../../../lib/auth-client";
 import BgButton from "../../../assets/img/items/bara-vot.webp";
 
 const RegisterComp = () => {
@@ -36,14 +36,16 @@ const RegisterComp = () => {
       setError("");
     }
 
-    const status = await serverFunction.register(user.email, user.password);
+    const { error } = await authClient.signUp.email({
+      email: user.email,
+      password: user.password,
+      name: user.email.split("@")[0],
+    });
 
-    const info = status.status;
-
-    if (info == "ok") {
+    if (!error) {
       localStorage.setItem("email", user.email);
       window.location.replace("/otp");
-    } else setError(`${status.errorMessage}`);
+    } else setError(authErrorMessage(error));
   };
 
   return (

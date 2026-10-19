@@ -1,9 +1,5 @@
 import "dotenv/config";
-import { PrismaClient } from "./prisma/generated/prisma/client/index";
-
-const prisma = new PrismaClient({
-  log: ["error"],
-});
+import { prisma } from "./lib/prisma.js";
 
 async function testConnection() {
   console.log("⏳ Se încearcă conectarea la baza de date prin Prisma...\n");
