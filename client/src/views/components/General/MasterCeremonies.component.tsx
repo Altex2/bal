@@ -25,6 +25,9 @@ export default function MasterCeremonies() {
             </div>
             <div className="h-auto w-auto flex items-center justify-center">
               <p className=" text-justify mx-8 mb-20 text-xs md:text-sm">
+                DJ IOVA va fi alături de noi, cu cele mai tari beat-uri, care
+                transformă ringul de dans în locul unde se scriu cele mai
+                frumoase amintiri!
                 <br />
                 <br />
                 <br />
