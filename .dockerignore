@@ -1,0 +1,26 @@
+# Dependencies (reinstalled in the container)
+node_modules
+client/node_modules
+server/node_modules
+
+# Build artifacts
+client/build
+server/prisma/generated
+
+# Git & IDE
+.git
+.gitignore
+.vscode
+.idea
+.agents
+.claude
+.windsurf
+
+# Environment files (secrets injected at runtime)
+.env
+server/.env
+
+# Documentation
+*.md
+volumes
+LICENSE

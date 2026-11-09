@@ -1,0 +1,61 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      hosting:
+        ipv4_address: 10.0.2.150
+
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - hosting
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    # ports:
+    #   - "${PORT:-4000}:4000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@10.0.2.100:5432/${POSTGRES_DB}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - hosting
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bal.rule=Host(`bbetti.lsebucuresti.org`)"
+      - "traefik.http.routers.bal.entrypoints=https"
+      - "traefik.http.routers.bal.tls=true"
+      - "traefik.http.services.bal.loadbalancer.server.port=4000"
+      #Define midleware
+      #- "traefik.http.routers.bitwarden.middlewares=my-traefikBouncer@file,my-cloudflarewarp@file"
+      #- "traefik.http.routers.bitwarden.middlewares=my-traefikBouncer@file"
+networks:
+  hosting:
+    name: hosting
+    external: true

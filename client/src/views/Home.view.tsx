@@ -1,46 +1,63 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, type ReactNode } from "react";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
 
+import Background from "../assets/img/Background/colaj.jpg";
 //media
 import Header from "./components/General/Header";
 
-//2025
-import first from "../assets/img/posters/2025/first2.png";
-import first_stanga from "../assets/img/concurenti/Concurenti2025/first_stanga.webp"
-import first_dreapta from "../assets/img/concurenti/Concurenti2025/first_dreapta.webp"
-import avatar1 from "../assets/img/items/avatar/avatar11.jpg"
-import avatar2 from "../assets/img/items/avatar/avatar22.jpg"
-import joker2 from "../assets/img/items/Joker/Joker2.jpg" 
-import joker1 from "../assets/img/concurenti/Concurenti2025/Joker1.webp"
-import angelvsdemon from "../assets/img/posters/2025/avd.png"
-import angelvsdemon1 from "../assets/img/concurenti/Concurenti2025/angelvsdemon1.webp"
-import angelvsdemon2 from "../assets/img/concurenti/Concurenti2025/angelvsdemon2.webp"
-import adleft from "../assets/img/items/angelsanddemons/a&dleft.jpg"
-import adright from "../assets/img/items/angelsanddemons/a&dright.jpg"
-import Background from "../assets/img/Background/colaj.jpg"
-import pirmaids from "../assets/img/posters/2025/piramids.png"
-import egiptleft from "../assets/img/concurenti/Concurenti2025/egiptleft.webp"
-import egiptright from "../assets/img/concurenti/Concurenti2025/egiptright.webp"
-import eleft from "../assets/img/items/egipt/eleft.jpg"
-import eright from "../assets/img/items/egipt/eright.jpg"
-import piratileft from "../assets/img/concurenti/Concurenti2025/cicapirati_left.webp"
-import piratright from "../assets/img/concurenti/Concurenti2025/cicapirati_right.webp"
-import corabie from "../assets/img/items/pirati/corabieleft.jpg"
-import piraticeva from "../assets/img/items/pirati/piraticeva.png"
-import piratiland from "../assets/img/posters/2025/pirates.png"
-import gods from "../assets/img/posters/2025/gods.png"
-import cicagods1 from "../assets/img/concurenti/Concurenti2025/cicagods.webp"
-import cicagods2 from "../assets/img/concurenti/Concurenti2025/cicagods2.webp"
-import gods1 from "../assets/img/items/gods/gods2.jpg"
-import gods2 from "../assets/img/items/gods/gods4.jpg"
-import joker3 from "../assets/img/concurenti/Concurenti2025/joker2.webp"
-import jokercity from "../assets/img/posters/2025/jokercity.png"
-import joker4 from "../assets/img/items/Joker/joker4.jpg"
+// p1
+import first from "../assets/img/posters/2025/first2.jpg";
+import first_stanga from "../assets/img/concurenti/Concurenti2026/p1/p1matei11.jpg";
+import first_dreapta from "../assets/img/concurenti/Concurenti2026/p1/p1miruna22.jpg";
+import avatar1 from "../assets/img/concurenti/Concurenti2026/p1/p1left.jpg";
+import avatar2 from "../assets/img/concurenti/Concurenti2026/p1/p1rigth.jpg";
 
+// p2
+import joker3 from "../assets/img/concurenti/Concurenti2026/p2/p2GabiLeft.jpg";
+import jokercity from "../assets/img/concurenti/Concurenti2026/p2/p2Central.jpg";
+import joker1 from "../assets/img/concurenti/Concurenti2026/p2/p2MirunaRight.jpg";
+import joker2 from "../assets/img/concurenti/Concurenti2026/p2/p2Left.jpg";
+import joker4 from "../assets/img/concurenti/Concurenti2026/p2/p2Rigth.jpg";
+
+//p3
+import angelvsdemon from "../assets/img/concurenti/Concurenti2026/p3/p3Poster.jpg";
+import angelvsdemon1 from "../assets/img/concurenti/Concurenti2026/p3/p3Left.jpg";
+import angelvsdemon2 from "../assets/img/concurenti/Concurenti2026/p3/p3Rigth.jpg";
+import adleft from "../assets/img/concurenti/Concurenti2026/p3/p3LeftP.jpg";
+import adright from "../assets/img/concurenti/Concurenti2026/p3/p3RigthP.jpg";
+
+// p4
+import pirmaids from "../assets/img/concurenti/Concurenti2026/p4/p4Poster.jpg";
+import egiptleft from "../assets/img/concurenti/Concurenti2026/p4/p4Left.jpg";
+import egiptright from "../assets/img/concurenti/Concurenti2026/p4/p4Rigth.jpg";
+import eleft from "../assets/img/concurenti/Concurenti2026/p4/p4LeftP.jpg";
+import eright from "../assets/img/concurenti/Concurenti2026/p4/p4RigthP.jpg";
+
+//p5
+import piratileft from "../assets/img/concurenti/Concurenti2026/p5/p5Left.jpg";
+import piratright from "../assets/img/concurenti/Concurenti2026/p5/p5Rigth.jpg";
+import corabie from "../assets/img/concurenti/Concurenti2026/p5/p5LeftP.jpg";
+import piraticeva from "../assets/img/concurenti/Concurenti2026/p5/p5RigthP.jpg";
+import piratiland from "../assets/img/concurenti/Concurenti2026/p5/p5Poster.jpg";
+
+// DJ (poster + mix of photos from the other couples)
+import djPoster from "../assets/img/posters/America.jpg";
+import djLeft1 from "../assets/img/concurenti/Concurenti2026/p1/matei.jpg";
+import djRight1 from "../assets/img/concurenti/Concurenti2026/p6/ariana.jpg";
+import djLeft2 from "../assets/img/concurenti/Concurenti2026/p3/antonio.jpg";
+import djRight2 from "../assets/img/concurenti/Concurenti2026/p5/beatrice.jpg";
+
+// p6
+import gods from "../assets/img/concurenti/Concurenti2026/p6/p6Poster.jpg";
+import cicagods1 from "../assets/img/concurenti/Concurenti2026/p6/p6Left.jpg";
+import cicagods2 from "../assets/img/concurenti/Concurenti2026/p6/p6Right.jpg";
+import gods1 from "../assets/img/concurenti/Concurenti2026/p6/p6LeftP.jpg";
+import gods2 from "../assets/img/concurenti/Concurenti2026/p6/p6RigthP.jpg";
 
 //componente
 import "intersection-observer";
 import Singer from "./components/General/Singer.component";
+import DJ from "./components/General/DJ.component";
 import Description from "./components/General/Description.component";
 import Locatie from "./components/General/Locatie.component";
 import MasterCeremonies from "./components/General/MasterCeremonies.component";
@@ -48,7 +65,93 @@ import Gallery from "./components/General/Gallery.component";
 import Footer from "./components/General/Footer.component";
 import Sponsori from "./components/General/Sponsori.component";
 
+// Below Tailwind's `md` breakpoint the parallax layout can't fit the content
+// (each layer is a fixed fraction of the viewport height), so text and images
+// spill into the next section. On mobile we render a normal stacked layout.
+const MOBILE_QUERY = "(max-width: 767px)";
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(
+    () =>
+      typeof window !== "undefined" && window.matchMedia(MOBILE_QUERY).matches,
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia(MOBILE_QUERY);
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", onChange);
+    setIsMobile(mql.matches);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
+  return isMobile;
+};
+
+type MobileSection = {
+  poster: string;
+  /** Tailwind height class for this banner on mobile (default h-[55vh]) */
+  bannerHeight?: string;
+  posterPosition?: string;
+  content: ReactNode;
+};
+
+const mobileSections: MobileSection[] = [
+  { poster: first, posterPosition: "50% 0%", content: <Description /> },
+  { poster: jokercity, posterPosition: "center 50%", content: <Singer /> },
+  { poster: djPoster, posterPosition: "center 60%", content: <DJ /> },
+  {
+    poster: angelvsdemon,
+    posterPosition: "center 60%",
+    content: <MasterCeremonies />,
+  },
+  { poster: pirmaids, posterPosition: "center 10%", content: <Sponsori /> },
+  { poster: piratiland, bannerHeight: "h-[75vh]", content: <Gallery /> },
+  { poster: gods, content: <Locatie /> },
+];
+
+const MobileHome = () => (
+  <>
+    <Header />
+    <main className="bg-black min-h-screen overflow-x-hidden">
+      <section
+        className="relative w-full h-[100svh] bg-cover bg-center"
+        style={{ backgroundImage: `url(${Background})` }}
+      >
+        <div className="h-full w-full flex items-center justify-center px-4">
+          <h1 className="text-4xl text-gray-300 font-bold bg-black/70 px-8 py-6 rounded-full text-center">
+            Balul Bobocilor
+          </h1>
+        </div>
+      </section>
+
+      {mobileSections.map((section, i) => (
+        <section key={i} className="w-full">
+          <div
+            className={`w-full ${section.bannerHeight ?? "h-[55vh]"} bg-cover`}
+            style={{
+              backgroundImage: `url(${section.poster})`,
+              backgroundPosition: section.posterPosition ?? "center",
+            }}
+          >
+            <div className="w-full h-full bg-black/50" />
+          </div>
+          <div className="w-full py-12">{section.content}</div>
+        </section>
+      ))}
+
+      <div className="pb-8">
+        <Footer />
+      </div>
+    </main>
+  </>
+);
+
 const Home = () => {
+  const isMobile = useIsMobile();
+  return isMobile ? <MobileHome /> : <DesktopHome />;
+};
+
+const DesktopHome = () => {
   const parallax = useRef<IParallax>(null!);
 
   const elementRef = useRef(null);
@@ -81,10 +184,10 @@ const Home = () => {
     <>
       <Header />
       <div>
-        <Parallax ref={parallax} pages={7.51}>
+        <Parallax ref={parallax} pages={8.91}>
           <ParallaxLayer
             offset={0}
-            factor={8}
+            factor={9}
             speed={0}
             style={{
               backgroundColor: "#000000",
@@ -103,16 +206,15 @@ const Home = () => {
             </div>
           </ParallaxLayer>
           <ParallaxLayer
-          offset={1}
-          factor={0.4} 
-          speed={0.5}
-          style={{
-          backgroundImage: `url(${first})`,
-          backgroundSize: "cover",
-          backgroundPosition: "50% 20%", 
-          
-          }}
->
+            offset={1}
+            factor={0.55}
+            speed={0.5}
+            style={{
+              backgroundImage: `url(${first})`,
+              backgroundSize: "cover",
+              backgroundPosition: "50% 0%",
+            }}
+          >
             <div className="w-full h-full bg-black/50"></div>
           </ParallaxLayer>
           <ParallaxLayer
@@ -147,7 +249,7 @@ const Home = () => {
               />
             </div>
           </ParallaxLayer>
-          <ParallaxLayer offset={1.4} factor={1.1} speed={0.5}>
+          <ParallaxLayer offset={1.55} factor={1.1} speed={0.5}>
             <div className="  w-full h-full flex justify-center items-center">
               <div className="  md:w-[60%] md:h-[70%] md:mb-20 h-[70%] w-[100%]">
                 <Description />
@@ -157,12 +259,12 @@ const Home = () => {
 
           <ParallaxLayer
             offset={2}
-            factor={0.4}
+            factor={0.55}
             speed={0.5}
             style={{
               backgroundImage: `url(${jokercity})`,
               backgroundSize: "cover",
-              backgroundPosition: "center 50%",
+              backgroundPosition: "center 40%",
             }}
           >
             <div className="w-full h-full bg-black/50"></div>
@@ -199,7 +301,12 @@ const Home = () => {
               />
             </div>
           </ParallaxLayer>
-          <ParallaxLayer offset={2.4} factor={1.1} speed={0.5} ref={elementRef}>
+          <ParallaxLayer
+            offset={2.55}
+            factor={1.1}
+            speed={0.5}
+            ref={elementRef}
+          >
             <div className="  w-full h-full flex justify-center items-center">
               <div className="  md:w-[60%]  md:h-[70%] md:mb-20 h-[70%] w-[100%] ">
                 <Singer />
@@ -208,18 +315,68 @@ const Home = () => {
           </ParallaxLayer>
           <ParallaxLayer
             offset={3}
-            factor={0.4}
+            factor={0.55}
             speed={0.5}
             style={{
-              backgroundImage: `url(${angelvsdemon})`,
+              backgroundImage: `url(${djPoster})`,
               backgroundSize: "cover",
-              backgroundPosition: "center 60%",
+              backgroundPosition: "center 0%",
             }}
           >
             <div className="w-full h-full bg-black/50"></div>
           </ParallaxLayer>
           <ParallaxLayer
             offset={3.7}
+            speed={2}
+            style={{ opacity: 0.6 }}
+            factor={0.5}
+          >
+            <div className="hidden md:flex justify-between mt-40 md:mt-20">
+              <img
+                alt="djLeft1"
+                src={djLeft1}
+                className="transform md:w-[17%] w-[40%] -rotate-6 scale-[85%]"
+              />
+              <img
+                alt="djRight1"
+                src={djRight1}
+                className="transform md:w-[17%] w-[40%] rotate-6 scale-[85%]"
+              />
+            </div>
+            <div className="hidden md:flex justify-between mt-40 md:mt-20">
+              <img
+                alt="djLeft2"
+                src={djLeft2}
+                className="transform md:w-[17%] w-[40%] rotate-6 scale-[85%]"
+              />
+              <img
+                alt="djRight2"
+                src={djRight2}
+                className="transform md:w-[17%] w-[40%] -rotate-6 scale-[85%]"
+              />
+            </div>
+          </ParallaxLayer>
+          <ParallaxLayer offset={3.55} factor={1.1} speed={0.5}>
+            <div className="w-full h-full flex justify-center items-center">
+              <div className="md:w-[60%] md:h-[70%] md:mb-20 h-[70%] w-[100%]">
+                <DJ />
+              </div>
+            </div>
+          </ParallaxLayer>
+          <ParallaxLayer
+            offset={4}
+            factor={0.55}
+            speed={0.5}
+            style={{
+              backgroundImage: `url(${angelvsdemon})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center 50%",
+            }}
+          >
+            <div className="w-full h-full bg-black/50"></div>
+          </ParallaxLayer>
+          <ParallaxLayer
+            offset={4.7}
             speed={2}
             style={{ opacity: 0.6 }}
             factor={0.5}
@@ -249,7 +406,12 @@ const Home = () => {
               />
             </div>
           </ParallaxLayer>
-          <ParallaxLayer offset={3.4} factor={1.1} speed={0.5} ref={elementRef}>
+          <ParallaxLayer
+            offset={4.55}
+            factor={1.1}
+            speed={0.5}
+            ref={elementRef}
+          >
             <div className=" w-full h-full flex justify-center items-center">
               <div className="  md:w-[60%] md:h-[70%] md:mb-20 h-[70%] w-[100%]">
                 <MasterCeremonies />
@@ -257,8 +419,8 @@ const Home = () => {
             </div>
           </ParallaxLayer>
           <ParallaxLayer
-            offset={4}
-            factor={0.4}
+            offset={5}
+            factor={0.55}
             speed={0.5}
             style={{
               backgroundImage: `url(${pirmaids})`,
@@ -269,7 +431,7 @@ const Home = () => {
             <div className="w-full h-full bg-black/50"></div>
           </ParallaxLayer>
           <ParallaxLayer
-            offset={4.7}
+            offset={5.7}
             speed={2}
             style={{ opacity: 0.6 }}
             factor={0.5}
@@ -299,7 +461,12 @@ const Home = () => {
               />
             </div>
           </ParallaxLayer>
-          <ParallaxLayer offset={4.4} factor={1.1} speed={0.5} ref={elementRef}>
+          <ParallaxLayer
+            offset={5.55}
+            factor={1.1}
+            speed={0.5}
+            ref={elementRef}
+          >
             <div className="  w-full h-full flex justify-center items-center">
               <div className="  md:w-[60%] md:h-[70%] md:mb-20 h-[70%] w-[100%]">
                 <Sponsori />
@@ -307,8 +474,8 @@ const Home = () => {
             </div>
           </ParallaxLayer>
           <ParallaxLayer
-            offset={5}
-            factor={0.4}
+            offset={6}
+            factor={0.8}
             speed={0.5}
             style={{
               backgroundImage: `url(${piratiland})`,
@@ -318,7 +485,7 @@ const Home = () => {
             <div className="w-full h-full bg-black/50"></div>
           </ParallaxLayer>
           <ParallaxLayer
-            offset={5.7}
+            offset={6.95}
             speed={2}
             style={{ opacity: 0.6 }}
             factor={0.5}
@@ -349,7 +516,12 @@ const Home = () => {
               />
             </div>
           </ParallaxLayer>
-          <ParallaxLayer offset={5.4} factor={1.1} speed={0.5} ref={elementRef}>
+          <ParallaxLayer
+            offset={6.8}
+            factor={1.1}
+            speed={0.5}
+            ref={elementRef}
+          >
             <div className=" w-full h-full flex justify-center items-center">
               <div className="  md:w-[60%] md:h-[70%] md:mb-20 h-[70%] w-[100%]">
                 <Gallery />
@@ -357,8 +529,8 @@ const Home = () => {
             </div>
           </ParallaxLayer>
           <ParallaxLayer
-            offset={6}
-            factor={0.4}
+            offset={7.25}
+            factor={0.55}
             speed={0.5}
             style={{
               backgroundImage: `url(${gods})`,
@@ -368,7 +540,7 @@ const Home = () => {
             <div className="w-full h-full bg-black/50"></div>
           </ParallaxLayer>
           <ParallaxLayer
-            offset={6.7}
+            offset={7.95}
             speed={2}
             style={{ opacity: 0.6 }}
             factor={0.5}
@@ -399,7 +571,12 @@ const Home = () => {
               />
             </div>
           </ParallaxLayer>
-          <ParallaxLayer offset={6.4} factor={1.1} speed={0.5} ref={elementRef}>
+          <ParallaxLayer
+            offset={7.8}
+            factor={1.1}
+            speed={0.5}
+            ref={elementRef}
+          >
             <div className=" w-full h-full flex justify-center items-center">
               <div className="  md:w-[60%] md:h-[70%] md:mb-20 h-[70%] w-[100%]">
                 <Locatie />
