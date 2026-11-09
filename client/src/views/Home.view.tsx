@@ -1,42 +1,51 @@
 import { useRef, useEffect } from "react";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
 
+import Background from "../assets/img/Background/colaj.jpg";
 //media
 import Header from "./components/General/Header";
 
-//2025
-import first from "../assets/img/posters/2025/first2.png";
-import first_stanga from "../assets/img/concurenti/Concurenti2025/first_stanga.webp"
-import first_dreapta from "../assets/img/concurenti/Concurenti2025/first_dreapta.webp"
-import avatar1 from "../assets/img/items/avatar/avatar11.jpg"
-import avatar2 from "../assets/img/items/avatar/avatar22.jpg"
-import joker2 from "../assets/img/items/Joker/Joker2.jpg" 
-import joker1 from "../assets/img/concurenti/Concurenti2025/Joker1.webp"
-import angelvsdemon from "../assets/img/posters/2025/avd.png"
-import angelvsdemon1 from "../assets/img/concurenti/Concurenti2025/angelvsdemon1.webp"
-import angelvsdemon2 from "../assets/img/concurenti/Concurenti2025/angelvsdemon2.webp"
-import adleft from "../assets/img/items/angelsanddemons/a&dleft.jpg"
-import adright from "../assets/img/items/angelsanddemons/a&dright.jpg"
-import Background from "../assets/img/Background/colaj.jpg"
-import pirmaids from "../assets/img/posters/2025/piramids.png"
-import egiptleft from "../assets/img/concurenti/Concurenti2025/egiptleft.webp"
-import egiptright from "../assets/img/concurenti/Concurenti2025/egiptright.webp"
-import eleft from "../assets/img/items/egipt/eleft.jpg"
-import eright from "../assets/img/items/egipt/eright.jpg"
-import piratileft from "../assets/img/concurenti/Concurenti2025/cicapirati_left.webp"
-import piratright from "../assets/img/concurenti/Concurenti2025/cicapirati_right.webp"
-import corabie from "../assets/img/items/pirati/corabieleft.jpg"
-import piraticeva from "../assets/img/items/pirati/piraticeva.png"
-import piratiland from "../assets/img/posters/2025/pirates.png"
-import gods from "../assets/img/posters/2025/gods.png"
-import cicagods1 from "../assets/img/concurenti/Concurenti2025/cicagods.webp"
-import cicagods2 from "../assets/img/concurenti/Concurenti2025/cicagods2.webp"
-import gods1 from "../assets/img/items/gods/gods2.jpg"
-import gods2 from "../assets/img/items/gods/gods4.jpg"
-import joker3 from "../assets/img/concurenti/Concurenti2025/joker2.webp"
-import jokercity from "../assets/img/posters/2025/jokercity.png"
-import joker4 from "../assets/img/items/Joker/joker4.jpg"
+// p1
+import first from "../assets/img/posters/2025/first2.jpg";
+import first_stanga from "../assets/img/concurenti/Concurenti2026/p1/p1matei11.jpg";
+import first_dreapta from "../assets/img/concurenti/Concurenti2026/p1/p1miruna22.jpg";
+import avatar1 from "../assets/img/concurenti/Concurenti2026/p1/p1left.jpg";
+import avatar2 from "../assets/img/concurenti/Concurenti2026/p1/p1rigth.jpg";
 
+// p2
+import joker3 from "../assets/img/concurenti/Concurenti2026/p2/p2GabiLeft.jpg";
+import jokercity from "../assets/img/concurenti/Concurenti2026/p2/p2Central.jpg";
+import joker1 from "../assets/img/concurenti/Concurenti2026/p2/p2MirunaRight.jpg";
+import joker2 from "../assets/img/concurenti/Concurenti2026/p2/p2Left.jpg";
+import joker4 from "../assets/img/concurenti/Concurenti2026/p2/p2Rigth.jpg";
+
+//p3
+import angelvsdemon from "../assets/img/concurenti/Concurenti2026/p3/p3Poster.jpg";
+import angelvsdemon1 from "../assets/img/concurenti/Concurenti2026/p3/p3Left.jpg";
+import angelvsdemon2 from "../assets/img/concurenti/Concurenti2026/p3/p3Rigth.jpg";
+import adleft from "../assets/img/concurenti/Concurenti2026/p3/p3LeftP.jpg";
+import adright from "../assets/img/concurenti/Concurenti2026/p3/p3RigthP.jpg";
+
+// p4
+import pirmaids from "../assets/img/concurenti/Concurenti2026/p4/p4Poster.jpg";
+import egiptleft from "../assets/img/concurenti/Concurenti2026/p4/p4Left.jpg";
+import egiptright from "../assets/img/concurenti/Concurenti2026/p4/p4Rigth.jpg";
+import eleft from "../assets/img/concurenti/Concurenti2026/p4/p4LeftP.jpg";
+import eright from "../assets/img/concurenti/Concurenti2026/p4/p4RigthP.jpg";
+
+//p5
+import piratileft from "../assets/img/concurenti/Concurenti2026/p5/p5Left.jpg";
+import piratright from "../assets/img/concurenti/Concurenti2026/p5/p5Rigth.jpg";
+import corabie from "../assets/img/concurenti/Concurenti2026/p5/p5LeftP.jpg";
+import piraticeva from "../assets/img/concurenti/Concurenti2026/p5/p5RigthP.jpg";
+import piratiland from "../assets/img/concurenti/Concurenti2026/p5/p5Poster.jpg";
+
+// p6
+import gods from "../assets/img/concurenti/Concurenti2026/p6/p6Poster.jpg";
+import cicagods1 from "../assets/img/concurenti/Concurenti2026/p6/p6Left.jpg";
+import cicagods2 from "../assets/img/concurenti/Concurenti2026/p6/p6Right.jpg";
+import gods1 from "../assets/img/concurenti/Concurenti2026/p6/p6LeftP.jpg";
+import gods2 from "../assets/img/concurenti/Concurenti2026/p6/p6RigthP.jpg";
 
 //componente
 import "intersection-observer";
@@ -103,16 +112,15 @@ const Home = () => {
             </div>
           </ParallaxLayer>
           <ParallaxLayer
-          offset={1}
-          factor={0.4} 
-          speed={0.5}
-          style={{
-          backgroundImage: `url(${first})`,
-          backgroundSize: "cover",
-          backgroundPosition: "50% 20%", 
-          
-          }}
->
+            offset={1}
+            factor={0.4}
+            speed={0.5}
+            style={{
+              backgroundImage: `url(${first})`,
+              backgroundSize: "cover",
+              backgroundPosition: "50% 20%",
+            }}
+          >
             <div className="w-full h-full bg-black/50"></div>
           </ParallaxLayer>
           <ParallaxLayer

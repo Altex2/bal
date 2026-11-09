@@ -1,6 +1,6 @@
 import React from "react";
-import PozaDesk from "../../../assets/img/MC/MC2025.jpg";
-import PozaMobil from "../../../assets/img/MC/mobile.jpg";
+import PozaDesk from "../../../assets/img/MC/mc.png";
+import PozaMobil from "../../../assets/img/MC/mc.png";
 
 export default function MasterCeremonies() {
   return (
@@ -21,21 +21,15 @@ export default function MasterCeremonies() {
           </div>
           <div className="text-gray-300 md:mt-16  ">
             <div className="text-2xl font-bold flex justify-center mb-10">
-              <p>MC Leonardo Dumitrescu</p>
-            </div >
+              <p>MC Iova</p>
+            </div>
             <div className="h-auto w-auto flex items-center justify-center">
-            <p className=" text-justify mx-8 mb-20 text-xs md:text-sm">
-            Leonardo Dumitrescu, voluntar de încredere al Ligii Studenților Electroniști, 
-            și-a descoperit pasiunea pentru prezentarea de evenimente încă din primele proiecte studențești. 
-            Energia lui debordantă și abilitatea naturală de a interacționa cu publicul îl transformă într-un
-             MC care captează atenția din primul minut.
-              <br />
-              <br /> Spontaneitatea, umorul și talentul său de povestitor creează o atmosferă vibrantă la fiecare eveniment
-               pe care îl moderează. Leonardo spune adesea că reacțiile publicului sunt sursa lui de motivație, inspirându-l 
-               să se reinventeze de fiecare dată.
-              <br />
-              <br /> Pentru el, scena nu este doar un loc - este spațiul unde transformă simple momente în experiențe memorabile.
-            </p>
+              <p className=" text-justify mx-8 mb-20 text-xs md:text-sm">
+                <br />
+                <br />
+                <br />
+                <br />
+              </p>
             </div>
           </div>
         </div>
