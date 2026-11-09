@@ -21,8 +21,7 @@ export const auth = betterAuth({
     requireEmailVerification: true,
   },
   emailVerification: {
-    // With overrideDefaultEmailVerification these send the OTP from emailOTP below
-    sendOnSignUp: true,
+    sendOnSignUp: false,
     sendOnSignIn: true,
     autoSignInAfterVerification: true,
   },
