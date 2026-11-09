@@ -48,9 +48,10 @@ services:
       - hosting
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.bal.rule=Host(`bbetti.lsebucuresti.org`)"
+      - "traefik.http.routers.bal.rule=Host(`bbetti.lsebucuresti.org`) || Host(`bbetti.blitzcloud.me`) || Host(`ionut.lsebucuresti.org`)"
       - "traefik.http.routers.bal.entrypoints=https"
       - "traefik.http.routers.bal.tls=true"
+      - "traefik.http.routers.bal.tls.certresolver=httpresolver"
       - "traefik.http.services.bal.loadbalancer.server.port=4000"
       #Define midleware
       #- "traefik.http.routers.bitwarden.middlewares=my-traefikBouncer@file,my-cloudflarewarp@file"
