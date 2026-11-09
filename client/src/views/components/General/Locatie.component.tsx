@@ -4,7 +4,7 @@ export default function Locatie() {
   return (
     <>
       <div
-        className="flex justify-center text-4xl "
+        className="flex justify-center text-3xl md:text-4xl px-4"
         data-swiper-parallax="-200"
       >
         <p className="font-bold text-gray-300  mb-10 text-center">

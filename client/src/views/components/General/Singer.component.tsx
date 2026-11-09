@@ -10,17 +10,17 @@ export default function Singer() {
         <div className="grid md:grid-cols-2">
           <div className="w-full h-full">
             <img
-              className=" hidden md:block rounded-full"
+              className="hidden md:block w-full aspect-square object-cover rounded-full"
               src={Ramniceanu}
               alt="Singer"
             />
             <img
-              className="` block md:hidden rounded-full"
+              className="block md:hidden w-full aspect-square object-cover rounded-full"
               src={mobiles}
               alt="Singer"
             />
           </div>
-          <div className=" text-gray-300 mt-10 ">
+          <div className=" text-gray-300 md:mt-10 ">
             <div className=" text-2xl mt-10 md:mt-0 md:text-3xl font-bold flex justify-center">
               <p>Mariano</p>
             </div>
