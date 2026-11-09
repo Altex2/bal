@@ -42,10 +42,20 @@ const RegisterComp = () => {
       name: user.email.split("@")[0],
     });
 
-    if (!error) {
-      localStorage.setItem("email", user.email);
-      window.location.replace("/otp");
-    } else setError(authErrorMessage(error));
+    if (error) {
+      setError(authErrorMessage(error));
+      return;
+    }
+
+    // OTP bypass: the account is stored as verified (server/lib/prisma.ts),
+    // so sign-in succeeds right away instead of going through /otp
+    localStorage.setItem("email", user.email);
+    const signIn = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+    });
+    if (signIn.error) setError(authErrorMessage(signIn.error));
+    else window.location.replace("/");
   };
 
   return (
