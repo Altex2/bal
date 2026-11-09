@@ -15,7 +15,7 @@ export default function Singer() {
               alt="Singer"
             />
             <img
-              className=" ml-10 block md:hidden rounded-full"
+              className="` block md:hidden rounded-full"
               src={mobiles}
               alt="Singer"
             />

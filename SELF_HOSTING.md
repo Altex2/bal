@@ -53,4 +53,4 @@ UPDATE "user" SET admin = 'superadmin' WHERE email = 'someone@upb.ro';
 
 ## Concurenti
 
-The ids in `server/prisma/seed.ts` must match `idConcurent` in `client/src/assets/config/Concurenti.tsx`. When the list changes, update both and run `npm run db:seed`.
+The ids in `server/prisma/seed.ts` must match `idConcurent` in `client/src/assets/config/Concurenti.tsx`. Whcen the list changes, update both and run `npm run db:seed`.

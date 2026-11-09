@@ -211,3 +211,5 @@ vite.config.ts.timestamp-*
 # 3D Images
 *.3dm
 *.max
+
+volumes
