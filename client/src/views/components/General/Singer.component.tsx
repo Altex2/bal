@@ -32,11 +32,7 @@ export default function Singer() {
                 care îl transmite, Denis promite un show plin de intensitate și
                 emoție.
                 <br />
-                <br /> Prestațiile sale se remarcă prin dinamism, conexiunea
-                autentică cu publicul și energia care transformă orice apariție
-                într-un moment memorabil. În această seară specială, Denis
-                Ramniceanu va completa atmosfera magică a balului și va ridica
-                sala în picioare.
+                <br /> Prestațiile lui Mariano cuceresc prin energie, dinamism și felul firesc în care se conectează cu publicul. În această seară specială, el va aduce un plus de magie balului și va transforma apariția sa într-un moment de neuitat.
                 <br />
                 <br /> Pregătiți-vă pentru un spectacol care va amplifica
                 farmecul unei nopți în care destinul prinde viață.
